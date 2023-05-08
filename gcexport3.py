@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -32,6 +32,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
+import sys
 
 SCRIPT_VERSION = "2.0.0"
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
@@ -282,6 +283,17 @@ print("Login ticket=" + LOGIN_TICKET)
 print("Request authentication URL: " + URL_GC_POST_AUTH + "ticket=" + LOGIN_TICKET)
 http_req(URL_GC_POST_AUTH + "ticket=" + LOGIN_TICKET)
 print("Finished authentication")
+
+
+WEIGHT_URL = "https://connect.garmin.com/modern/proxy/weight-service/weight/dateRange"
+WEIGHT_DATA = {
+   "startDate": "2019-07-05",
+   "endDate":   "2019-08-01"
+}
+
+print(http_req("https://connect.garmin.com/modern/proxy/weight-service/weight/dateRange?startDate=2018-01-01&endDate=2019-08-01"))
+
+sys.exit(0)
 
 # We should be logged in now.
 if not isdir(ARGS.directory):
